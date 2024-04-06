@@ -5,7 +5,7 @@ A script to check appointment slots for VFS.
 By default, it runs every 2 minutes and check for visa slots at VFS website and notifies the user by SMS/call/Telegram. <br/>
 The interval can be changed in the config.
 
-## How to use
+## Usage
 
 `python vfs_appointment_bot/vfs_appointment_bot.py`
 
@@ -13,7 +13,7 @@ The interval can be changed in the config.
 
 ![VFS Appointment Form Screenshot](./assets/vfs-appointment-form.png)
 
-## Dependency
+## Dependencies
 
 1. Install Firefox Browser on your machine if not already installed.
 2. `geckodriver` (instructions to install geckodriver are written below)
@@ -22,7 +22,7 @@ The interval can be changed in the config.
     - Create a new bot via Telegram and add it to a chat group where you want it to post messages to notify you. Check [this simple tutorial out](https://medium.com/codex/using-python-to-send-telegram-messages-in-3-simple-steps-419a8b5e5e2) if you don't know how to create a new bot and get its credentials. Once bot is created you need to add its credentials in `config/config.ini` file.
 
 
-## How to install geckodriver
+## Installing geckodriver
 
 1. Run these the commands:
 
