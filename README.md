@@ -1,32 +1,13 @@
-# VFS Germany Appointment Bot
-[![GitHub license](https://img.shields.io/github/license/ranjan-mohanty/vfs-appointment-bot)](https://github.com/ranjan-mohanty/vfs-appointment-bot/blob/main/LICENSE)
-[![GitHub forks](https://img.shields.io/github/forks/ranjan-mohanty/vfs-appointment-bot)](https://github.com/ranjan-mohanty/vfs-appointment-bot/network)
-[![GitHub stars](https://img.shields.io/github/stars/ranjan-mohanty/vfs-appointment-bot)](https://github.com/ranjan-mohanty/vfs-appointment-bot/stargazers)
-[![GitHub issues](https://img.shields.io/github/issues/ranjan-mohanty/vfs-appointment-bot)](https://github.com/ranjan-mohanty/vfs-appointment-bot/issues)
-[![Twitter](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2Franjan-mohanty%2Fvfs-appointment-bot)](https://twitter.com/intent/tweet?text=Check%20this%20out%20&url=https%3A%2F%2Fgithub.com%2Franjan-mohanty%2Fvfs-appointment-bot)
+# VFS Appointment Bot
 
-
-A script to check the appointment slots.
+A script to check appointment slots for VFS.
 
 By default, it runs every 2 minutes and check for visa slots at VFS website and notifies the user by SMS/call/Telegram. <br/>
 The interval can be changed in the config.
 
 ## How to use
-1. Clone the repo: `git clone https://github.com/ranjan-mohanty/vfs-appointment-bot.git` <br/>
-2. Move into the repo: `cd vfs_appointment_bot` <br/>
-3. Update the config file (`config/config.ini`) with VFS, Twilio, Telegram credentials. Note that you can use either telegram, or twilio, or both. This can be specified with `use_telegram` and `use_twilio` config flags in same file.
-3. Create a new virtual environment: `python3 -m venv venv` or by using conda `conda create --name venv python=3.8`<br/>
-4. Activate the environment (might differ a bit for windows and MacOS): `source venv/bin/activate` / `conda activate venv` <br/>
-5. Install the dependencies: `pip install -r requirements.txt` <br/>
-6. Run the script:
-
-`python vfs_appointment_bot/vfs_appointment_bot.py '<vfs_centre>' '<visa_category>' '<visa_subcategory>'`
-
-OR
 
 `python vfs_appointment_bot/vfs_appointment_bot.py`
-
-It will take the values as input from the user
 
 ** Please refer to the screenshot for more details regarding the inputs.
 
@@ -62,7 +43,4 @@ It will take the values as input from the user
     `export PATH=$PATH:/path-to-extracted-file/geckodriver`
 
 
-## Contributors
 
-- [Ranjan Mohanty](https://github.com/ranjan-mohanty/)
-- [Bhavul Gauri](https://github.com/bhavul/)
