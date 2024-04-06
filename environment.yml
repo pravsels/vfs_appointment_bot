@@ -1,0 +1,8 @@
+name: vfs_bot
+dependencies:
+  - python=3.8
+  - pip
+  - pip:
+    - selenium==4.9.0
+    - requests 
+

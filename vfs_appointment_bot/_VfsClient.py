@@ -5,18 +5,17 @@ import logging
 import datetime
 
 from _ConfigReader import _ConfigReader
-from _TwilioClient import _TwilioClient
 from _TelegramClient import _TelegramClient
 
 
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.common.by import By
 
 class _VfsClient:
 
     def __init__(self):
-        self._twilio_client = _TwilioClient()
         self._telegram_client = _TelegramClient()
         self._config_reader = _ConfigReader()
 
@@ -39,7 +38,9 @@ class _VfsClient:
         firefox_options.add_argument("--disable-application-cache")
         firefox_options.add_argument("--disable-gpu")
         firefox_options.add_argument("--disable-dev-shm-usage")
-        self._web_driver = webdriver.Firefox(options=firefox_options)
+        webdriver_path = '/Users/pselvaraj/Downloads/geckodriver'
+        self._web_driver = webdriver.Firefox(executable_path=webdriver_path,
+                                             options=firefox_options)
 
         # make sure that the browser is full screen,
         # else some buttons will not be visible to selenium
@@ -57,17 +58,17 @@ class _VfsClient:
         time.sleep(10)
 
         # sleep provides sufficient time for all the elements to get visible
-        _email_input = self._web_driver.find_element_by_xpath("//input[@id='mat-input-0']")
+        _email_input = self._web_driver.find_element(By.XPATH, "//input[@id='mat-input-0']")
         _email_input.send_keys(_email)
-        _password_input = self._web_driver.find_element_by_xpath("//input[@id='mat-input-1']")
+        _password_input = self._web_driver.find_element(By.XPATH, "//input[@id='mat-input-1']")
         _password_input.send_keys(_password)
-        _login_button = self._web_driver.find_element_by_xpath("//button/span")
+        _login_button = self._web_driver.find_element(By.XPATH, "//button/span")
         _login_button.click()
         time.sleep(10)
 
     def _validate_login(self):
         try:
-            _new_booking_button = self._web_driver.find_element_by_xpath("//section/div/div[2]/button/span")
+            _new_booking_button = self._web_driver.find_element(By.XPATH, "//section/div/div[2]/button/span")
             if _new_booking_button == None:
                 logging.debug("Unable to login. VFS website is not responding")
                 raise Exception("Unable to login. VFS website is not responding")
@@ -80,19 +81,19 @@ class _VfsClient:
     def _get_appointment_date(self, visa_centre, category, sub_category):
         logging.info("Getting appointment date: Visa Centre: {}, Category: {}, Sub-Category: {}".format(visa_centre, category, sub_category))
         # select from drop down
-        _new_booking_button = self._web_driver.find_element_by_xpath(
+        _new_booking_button = self._web_driver.find_element(By.XPATH, 
             "//section/div/div[2]/button/span"
         )
         _new_booking_button.click()
         time.sleep(5)
-        _visa_centre_dropdown = self._web_driver.find_element_by_xpath(
+        _visa_centre_dropdown = self._web_driver.find_element(By.XPATH, 
             "//mat-form-field/div/div/div[3]"
         )
         _visa_centre_dropdown.click()
         time.sleep(2)
 
         try:
-            _visa_centre = self._web_driver.find_element_by_xpath(
+            _visa_centre = self._web_driver.find_element(By.XPATH, 
                 "//mat-option[starts-with(@id,'mat-option-')]/span[contains(text(), '{}')]".format(visa_centre)
             )
         except NoSuchElementException:
@@ -102,14 +103,14 @@ class _VfsClient:
         self._web_driver.execute_script("arguments[0].click();", _visa_centre)
         time.sleep(5)
 
-        _category_dropdown = self._web_driver.find_element_by_xpath(
+        _category_dropdown = self._web_driver.find_element(By.XPATH, 
             "//div[@id='mat-select-value-3']"
         )
         _category_dropdown.click()
         time.sleep(5)
 
         try:
-            _category = self._web_driver.find_element_by_xpath(
+            _category = self._web_driver.find_element(By.XPATH, 
                 "//mat-option[starts-with(@id,'mat-option-')]/span[contains(text(), '{}')]".format(category)
             )
         except NoSuchElementException:
@@ -119,7 +120,7 @@ class _VfsClient:
         self._web_driver.execute_script("arguments[0].click();", _category)
         time.sleep(5)
 
-        _subcategory_dropdown = self._web_driver.find_element_by_xpath(
+        _subcategory_dropdown = self._web_driver.find_element(By.XPATH, 
             "//div[@id='mat-select-value-5']"
         )
 
@@ -127,7 +128,7 @@ class _VfsClient:
         time.sleep(5)
 
         try:
-            _subcategory = self._web_driver.find_element_by_xpath(
+            _subcategory = self._web_driver.find_element(By.XPATH, 
                 "//mat-option[starts-with(@id,'mat-option-')]/span[contains(text(), '{}')]".format(sub_category)
             )
         except NoSuchElementException:
@@ -138,7 +139,7 @@ class _VfsClient:
         time.sleep(5)
 
         # read contents of the text box
-        return self._web_driver.find_element_by_xpath("//div[4]/div")
+        return self._web_driver.find_element(By.XPATH, "//div[4]/div")
 
     def check_slot(self, visa_centre, category, sub_category):
         self._init_web_driver()

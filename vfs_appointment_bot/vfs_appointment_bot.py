@@ -7,14 +7,15 @@ from _ConfigReader import _ConfigReader
 from _VfsClient import _VfsClient
 
 def _input():
-    print("Enter the visa centre: ")
-    visa_centre = input()
+    
+    visa_centre = 'gbr'
+    print("VFS centre: ", visa_centre)
 
-    print("Enter the category: ")
-    category = input()
+    category = 'schengen'
+    print("VFS category: ", category)
 
-    print("Enter the sub category: ")
-    sub_category = input()
+    sub_category = 'business'
+    print("VFS sub-category: ", sub_category)
 
     logging.debug("Visa centre: {}, Category: {}, Sub-Category: {}".format(visa_centre, category, sub_category))
 
