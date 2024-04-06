@@ -1,8 +1,8 @@
 # VFS Appointment Bot
 
-A script to check appointment slots for VFS.
+A script to check VFS appointment slots and notify through a Telegram bot.
 
-By default, it runs every 2 minutes and check for visa slots at VFS website and notifies the user by SMS/call/Telegram. <br/>
+By default, it runs every 2 minutes and check for visa slots at VFS website and notifies the user. <br/>
 The interval can be changed in the config.
 
 ## Usage
