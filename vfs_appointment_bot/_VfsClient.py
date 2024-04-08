@@ -64,15 +64,18 @@ class _VfsClient:
         _password_input.send_keys(_password)
         _login_button = self._web_driver.find_element(By.XPATH, "//button/span")
         _login_button.click()
+        print('Successfully logged in!!')
         time.sleep(10)
 
     def _validate_login(self):
         try:
-            _new_booking_button = self._web_driver.find_element(By.XPATH, "//section/div/div[2]/button/span")
+            _new_booking_button = self._web_driver.find_element(By.CLASS_NAME, 
+                                                                "mat-button-wrapper")
             if _new_booking_button == None:
                 logging.debug("Unable to login. VFS website is not responding")
                 raise Exception("Unable to login. VFS website is not responding")
             else:
+                print('found the new booking button!')
                 logging.debug("Logged in successfully")
         except:
             logging.debug("Unable to login. VFS website is not responding")
@@ -81,13 +84,14 @@ class _VfsClient:
     def _get_appointment_date(self, visa_centre, category, sub_category):
         logging.info("Getting appointment date: Visa Centre: {}, Category: {}, Sub-Category: {}".format(visa_centre, category, sub_category))
         # select from drop down
-        _new_booking_button = self._web_driver.find_element(By.XPATH, 
-            "//section/div/div[2]/button/span"
+        _new_booking_button = self._web_driver.find_element(By.CLASS_NAME, 
+            "mat-button-wrapper"
         )
         _new_booking_button.click()
+        print('clicked the new booking button!')
         time.sleep(5)
-        _visa_centre_dropdown = self._web_driver.find_element(By.XPATH, 
-            "//mat-form-field/div/div/div[3]"
+        _visa_centre_dropdown = self._web_driver.find_element(By.ID, 
+            "mat-select-0"
         )
         _visa_centre_dropdown.click()
         time.sleep(2)
@@ -103,8 +107,8 @@ class _VfsClient:
         self._web_driver.execute_script("arguments[0].click();", _visa_centre)
         time.sleep(5)
 
-        _category_dropdown = self._web_driver.find_element(By.XPATH, 
-            "//div[@id='mat-select-value-3']"
+        _category_dropdown = self._web_driver.find_element(By.ID, 
+            "mat-select-4"
         )
         _category_dropdown.click()
         time.sleep(5)
@@ -120,8 +124,8 @@ class _VfsClient:
         self._web_driver.execute_script("arguments[0].click();", _category)
         time.sleep(5)
 
-        _subcategory_dropdown = self._web_driver.find_element(By.XPATH, 
-            "//div[@id='mat-select-value-5']"
+        _subcategory_dropdown = self._web_driver.find_element(By.ID, 
+            "mat-select-2"
         )
 
         self._web_driver.execute_script("arguments[0].click();", _subcategory_dropdown)
@@ -145,7 +149,8 @@ class _VfsClient:
         self._init_web_driver()
 
         # open the webpage
-        self.vfs_login_url = self._config_reader.read_prop("VFS", "vfs_login_url")
+        self.vfs_login_url = self._config_reader.read_prop("VFS", 
+                                                           "vfs_login_url")
         self._web_driver.get(self.vfs_login_url)
 
         self._login()
