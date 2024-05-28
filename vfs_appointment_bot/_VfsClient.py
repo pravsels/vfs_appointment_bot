@@ -38,7 +38,7 @@ class _VfsClient:
         firefox_options.add_argument("--disable-application-cache")
         firefox_options.add_argument("--disable-gpu")
         firefox_options.add_argument("--disable-dev-shm-usage")
-        webdriver_path = '/Users/pselvaraj/Downloads/geckodriver'
+        webdriver_path = '/home/user/Downloads/geckodriver'
         self._web_driver = webdriver.Firefox(executable_path=webdriver_path,
                                              options=firefox_options)
 
